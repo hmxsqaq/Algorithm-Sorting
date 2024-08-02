@@ -1,4 +1,4 @@
-#include <thread>
+#include "sorting/bubble_sort.h"
 #include "utility/log.h"
 #include "utility/timer.h"
 
@@ -7,9 +7,8 @@ int main()
     Log::Instance().SetLogLevel(Log::Level::LOG_DEBUG);
     Log::Instance().SetLogFile("log.txt", std::ios::out);
 
-    Timer timer("Main");
-    std::this_thread::sleep_for(std::chrono::milliseconds(50));
-    timer.Stop();
+    Test::Sorting(BubbleSort::Sort<int>, "32Kints.txt");
+    Test::Sorting(BubbleSort::Sort<int>, 32000, -1000, 1000);
 
     return 0;
 }
