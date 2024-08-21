@@ -8,30 +8,61 @@
 
 class Timer {
 public:
-    explicit Timer(std::string name = "Timer") : name_(std::move(name)), start_time_point_(Clock::now()) { }
+    explicit Timer(std::string name = "Timer", const bool auto_log = true)
+        : name_(std::move(name)), last_time_point_(Clock::now()), auto_log_(auto_log) { }
 
     ~Timer() {
         if (!is_stopped_) Stop();
+        if (auto_log_) Log();
+    }
+
+    void Start() {
+        if (is_started_) return;
+        last_time_point_ = Clock::now();
+        is_started_ = true;
+        is_paused_ = false;
+        is_stopped_ = false;
+    }
+
+    void Pause() {
+        if (is_paused_ || is_stopped_) return;
+        duration_ += std::chrono::duration_cast<std::chrono::milliseconds>(Clock::now() - last_time_point_);
+        is_paused_ = true;
+    }
+
+    void Resume() {
+        if (!is_paused_ || is_stopped_) return;
+        last_time_point_ = Clock::now();
+        is_paused_ = false;
     }
 
     void Stop() {
-        if (is_stopped_) {
-            LOG_WARNING("Timer already stopped");
-            return;
-        }
-        const TimePoint end_time_point = Clock::now();
-        const auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end_time_point - start_time_point_);
-        LOG_INFO("Timer - " + name_ + ": " + std::to_string(duration.count()) + "ms");
+        if (is_stopped_) return;
+        Pause();
+        is_started_ = false;
+        is_paused_ = false;
         is_stopped_ = true;
     }
+
+    void Log() const {
+        LOG_INFO("Timer - " + name_ + ": " + std::to_string(duration_.count()) + "ms");
+    }
+
+    [[nodiscard]] std::string name() const { return name_; }
+    [[nodiscard]] std::chrono::milliseconds duration() const { return duration_; }
 
 private:
     using Clock = std::chrono::high_resolution_clock;
     using TimePoint = Clock::time_point;
+    using Duration = std::chrono::milliseconds;
 
     std::string name_;
-    TimePoint start_time_point_;
+    TimePoint last_time_point_;
+    Duration duration_ = Duration::zero();
     bool is_stopped_ = false;
+    bool is_paused_ = false;
+    bool is_started_ = false;
+    bool auto_log_;
 };
 
 #endif //TIMER_H

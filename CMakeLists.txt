@@ -8,7 +8,7 @@ include_directories(${CMAKE_SOURCE_DIR}/src)
 
 file(GLOB_RECURSE SOURCES
         "${CMAKE_SOURCE_DIR}/src/*.h"
-        "${CMAKE_SOURCE_DIR}/src/*.cpp"
+        "${CMAKE_SOURCE_DIR}/src/*.cc"
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
