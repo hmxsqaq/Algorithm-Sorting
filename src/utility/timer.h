@@ -16,14 +16,6 @@ public:
         if (auto_log_) Log();
     }
 
-    void Start() {
-        if (is_started_) return;
-        last_time_point_ = Clock::now();
-        is_started_ = true;
-        is_paused_ = false;
-        is_stopped_ = false;
-    }
-
     void Pause() {
         if (is_paused_ || is_stopped_) return;
         duration_ += std::chrono::duration_cast<std::chrono::microseconds>(Clock::now() - last_time_point_);
@@ -39,9 +31,15 @@ public:
     void Stop() {
         if (is_stopped_) return;
         Pause();
-        is_started_ = false;
         is_paused_ = false;
         is_stopped_ = true;
+    }
+
+    void Reset() {
+        last_time_point_ = Clock::now();
+        duration_ = Duration::zero();
+        is_stopped_ = false;
+        is_paused_ = false;
     }
 
     void Log() const {
@@ -61,7 +59,6 @@ private:
     Duration duration_ = Duration::zero();
     bool is_stopped_ = false;
     bool is_paused_ = false;
-    bool is_started_ = false;
     bool auto_log_;
 };
 

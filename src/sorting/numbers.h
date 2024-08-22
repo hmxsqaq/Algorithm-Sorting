@@ -9,7 +9,7 @@
 class Numbers {
 public:
     static void GenerateRandomNumbers(const size_t size, const int min_value, const int max_value, std::vector<int> &ref_nums) {
-        ref_nums.reserve(size);
+        ref_nums.resize(size);
         const unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
         std::mt19937 generator(seed);
         std::uniform_int_distribution<int> distribution(min_value, max_value);
@@ -28,10 +28,10 @@ public:
         std::string line;
         std::getline(in, line);
         const size_t size = std::stoi(line);
-        ref_nums.reserve(size);
+        ref_nums.resize(size);
         for (int i = 0; i < size; i++) {
             std::getline(in, line);
-            ref_nums.emplace_back(std::stoi(line));
+            ref_nums[i] = std::stoi(line);
         }
         in.close();
     }
