@@ -13,9 +13,9 @@ inline void TestSortAlgorithm(const std::string& algorithm_name, const std::func
     compare_tracker.Log();
     timer.Log();
     if (IsSorted(vec)) {
-        LOG_INFO("Test - " + algorithm_name + " passed\n");
+        LOG_INFO("Test - PASSED\n");
     } else {
-        LOG_ERROR("Test - " + algorithm_name + " failed\n");
+        LOG_ERROR("Test - FAILED\n");
     }
 }
 

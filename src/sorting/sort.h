@@ -15,14 +15,14 @@ inline void Swap(int &a, int &b) {
     swap_tracker.FunctionEnd();
 }
 
-inline bool IsASmallerThanB(const int &a, const int &b) {
+inline bool IsSmaller(const int &a, const int &b) {
     compare_tracker.FunctionStart();
     const bool result = a < b;
     compare_tracker.FunctionEnd();
     return result;
 }
 
-inline bool IsAGreaterThanB(const int &a, const int &b) {
+inline bool IsGreater(const int &a, const int &b) {
     compare_tracker.FunctionStart();
     const bool result = a > b;
     compare_tracker.FunctionEnd();

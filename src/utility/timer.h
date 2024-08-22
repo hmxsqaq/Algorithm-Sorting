@@ -45,7 +45,7 @@ public:
     }
 
     void Log() const {
-        LOG_INFO("Timer - " + name_ + ": " + std::to_string(duration_.count()) + "us");
+        LOG_INFO("Timer - " + name_ + " took " + std::to_string(duration_.count()) + "us");
     }
 
     [[nodiscard]] std::string name() const { return name_; }
