@@ -26,7 +26,7 @@ public:
 
     void Pause() {
         if (is_paused_ || is_stopped_) return;
-        duration_ += std::chrono::duration_cast<std::chrono::milliseconds>(Clock::now() - last_time_point_);
+        duration_ += std::chrono::duration_cast<std::chrono::microseconds>(Clock::now() - last_time_point_);
         is_paused_ = true;
     }
 
@@ -45,16 +45,16 @@ public:
     }
 
     void Log() const {
-        LOG_INFO("Timer - " + name_ + ": " + std::to_string(duration_.count()) + "ms");
+        LOG_INFO("Timer - " + name_ + ": " + std::to_string(duration_.count()) + "us");
     }
 
     [[nodiscard]] std::string name() const { return name_; }
-    [[nodiscard]] std::chrono::milliseconds duration() const { return duration_; }
+    [[nodiscard]] long long duration() const { return duration_.count(); }
 
 private:
     using Clock = std::chrono::high_resolution_clock;
     using TimePoint = Clock::time_point;
-    using Duration = std::chrono::milliseconds;
+    using Duration = std::chrono::microseconds;
 
     std::string name_;
     TimePoint last_time_point_;

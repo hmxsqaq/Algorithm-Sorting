@@ -17,7 +17,7 @@ public:
     }
 
     void Log() const {
-        LOG_INFO("Function - " + timer_.name() + "() ran " + std::to_string(count_) + " times, taking " + std::to_string(timer_.duration().count()) + "ms");
+        LOG_INFO("Function - " + timer_.name() + "() ran " + std::to_string(count_) + " times, taking " + std::to_string(timer_.duration()) + "us");
     }
 
 private:

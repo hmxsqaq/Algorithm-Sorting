@@ -31,7 +31,7 @@ public:
         ref_nums.reserve(size);
         for (int i = 0; i < size; i++) {
             std::getline(in, line);
-            ref_nums[i] = std::stoi(line);
+            ref_nums.emplace_back(std::stoi(line));
         }
         in.close();
     }
