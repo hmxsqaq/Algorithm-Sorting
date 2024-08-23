@@ -1,6 +1,5 @@
-#include "sorting/bubble_sort.h"
+#include "sorting/sort_algorithm.h"
 #include "utility/numbers.h"
-#include "sorting/selection_sort.h"
 #include "sorting/test.h"
 
 int main()
@@ -10,11 +9,12 @@ int main()
 
     std::vector<int> nums;
     // Numbers::GenerateSortedNumbers(1000, true, nums);
-    Numbers::GetNumbersFromData("1Kints.txt", nums);
+    // Numbers::GetNumbersFromData("1Kints.txt", nums);
+    Numbers::GenerateRandomNumbers(10, 0, 100, nums);
 
-    TestSortAlgorithm("Bubble", BubbleSort, nums);
+    // TestSortAlgorithm("Bubble", BubbleSort, nums);
     // TestSortAlgorithm("BubbleWithFlag", BubbleSortWithFlag, nums);
-    TestSortAlgorithm("Selection", SelectionSort, nums);
-
+    // TestSortAlgorithm("Selection", SelectionSort, nums);
+    TestSortAlgorithm("Insertion", InsertionSort, nums, true);
     return 0;
 }
