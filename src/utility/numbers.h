@@ -3,7 +3,7 @@
 
 #include <functional>
 #include <random>
-#include "utility/log.h"
+#include "log.h"
 
 
 class Numbers {
@@ -34,6 +34,15 @@ public:
             ref_nums[i] = std::stoi(line);
         }
         in.close();
+    }
+
+    static void GenerateSortedNumbers(const int size, const bool ascend, std::vector<int> &ref_nums) {
+        ref_nums.resize(size);
+        if (ascend) {
+            for (int i = 0; i < size; i++) ref_nums[i] = i;
+        } else {
+            for (int i = size - 1; i >= 0; i--) ref_nums[i] = i;
+        }
     }
 };
 
