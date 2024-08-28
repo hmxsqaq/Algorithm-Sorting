@@ -9,12 +9,13 @@ int main()
 
     std::vector<int> nums;
     // Numbers::GenerateSortedNumbers(1000, true, nums);
-    // Numbers::GetNumbersFromData("1Kints.txt", nums);
-    Numbers::GenerateRandomNumbers(10, 0, 100, nums);
+    Numbers::GetNumbersFromData("1Kints.txt", nums);
+    // Numbers::GenerateRandomNumbers(10, 0, 100, nums);
 
     // TestSortAlgorithm("Bubble", BubbleSort, nums);
     // TestSortAlgorithm("BubbleWithFlag", BubbleSortWithFlag, nums);
     // TestSortAlgorithm("Selection", SelectionSort, nums);
-    TestSortAlgorithm("Insertion", InsertionSort, nums, true);
+    // TestSortAlgorithm("Insertion", InsertionSort, nums);
+    TestSortAlgorithm("Shell", ShellSort, nums);
     return 0;
 }

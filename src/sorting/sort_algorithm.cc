@@ -44,3 +44,22 @@ void InsertionSort(std::vector<int> &vec) {
         vec[j] = num;
     }
 }
+
+void ShellSort(std::vector<int> &vec) {
+    const int size = static_cast<int>(vec.size());
+    int h = size / 3;
+    while (h >= 1) {
+        for (int i = h; i < size; ++i) {
+            int num = vec[i], j = i;
+            while (j >= h && IsSmaller(num, vec[j - h])) {
+                vec[j] = vec[j - h];
+                j -= h;
+            }
+            vec[j] = num;
+        }
+        h /= 3;
+    }
+}
+
+void MergeSort(std::vector<int> &vec) {
+}
