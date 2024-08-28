@@ -16,6 +16,7 @@ int main()
     // TestSortAlgorithm("BubbleWithFlag", BubbleSortWithFlag, nums);
     // TestSortAlgorithm("Selection", SelectionSort, nums);
     // TestSortAlgorithm("Insertion", InsertionSort, nums);
-    TestSortAlgorithm("Shell", ShellSort, nums);
+    // TestSortAlgorithm("Shell", ShellSort, nums);
+    TestSortAlgorithm("Merge", MergeSortBottomToTop, nums);
     return 0;
 }
