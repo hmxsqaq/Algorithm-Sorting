@@ -21,4 +21,5 @@ std::list<int> MergeSortBasedOnList(std::list<int> &list);
 // 3. *self-merge: avoid creating temp array when merging
 void MergeSortOptimized(std::vector<int> &vec);
 
+void QuickSort(std::vector<int> &vec);
 #endif //SORT_ALGORITHM_H

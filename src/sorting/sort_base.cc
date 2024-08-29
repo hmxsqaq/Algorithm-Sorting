@@ -9,9 +9,9 @@ FunctionTracker compare_tracker("Compare");
 bool track_swap = false;
 bool track_compare = false;
 
-void Swap(int &a, int &b) {
+void Swap(std::vector<int> &vec, const int a, const int b) {
     if (track_swap) swap_tracker.FunctionStart();
-    std::swap(a, b);
+    std::swap(vec[a], vec[b]);
     if (track_swap) swap_tracker.FunctionEnd();
 }
 

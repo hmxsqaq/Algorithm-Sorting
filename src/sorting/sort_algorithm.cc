@@ -6,7 +6,7 @@ void BubbleSort(std::vector<int> &vec) {
     for (int i = size - 1; i > 0; --i)
         for (int j = 0; j < i; j++)
             if (IsGreater(vec[j], vec[j + 1]))
-                Swap(vec[j], vec[j + 1]);
+                Swap(vec, j, j + 1);
 }
 
 void BubbleSortWithFlag(std::vector<int> &vec) {
@@ -15,7 +15,7 @@ void BubbleSortWithFlag(std::vector<int> &vec) {
         bool flag = false;
         for (int j = 0; j < i; j++)
             if (IsGreater(vec[j], vec[j + 1])) {
-                Swap(vec[j], vec[j + 1]);
+                Swap(vec, j, j + 1);
                 flag = true;
             }
         if (!flag) break;
@@ -32,7 +32,7 @@ void SelectionSort(std::vector<int> &vec) {
             if (IsSmaller(vec[j], vec[min_index]))
                 min_index = j;
         if (min_index != i)
-            Swap(vec[i], vec[min_index]);
+            Swap(vec, i, min_index);
     }
 }
 
@@ -170,4 +170,32 @@ void MergeSortOptimized(std::vector<int> &vec) {
     const int size = static_cast<int>(vec.size());
     std::vector aux_vec(vec);
     MergeSortOptimized(aux_vec, vec, 0, size - 1);
+}
+
+
+/* ---------------QuickSort--------------- */
+int Partition(std::vector<int> &vec, const int left, const int right) {
+    const int item = vec[left];
+    int i = left, j = right + 1;
+    while (true) {
+        // stop even vec[i/j] == item, which may cause extra swap, but it can optimize elements' distribution
+        while (IsSmaller(vec[++i], item)) if (i == right) break; // prevent out-of-bounds
+        while (IsGreater(vec[--j], item)) if (j == left) break;
+        if (i >= j) break;
+        Swap(vec, i, j);
+    }
+    Swap(vec, left, j);
+    return j;
+}
+
+void QuickSort(std::vector<int> &vec, const int left, const int right) {
+    if (left >= right) return;
+    const int mid = Partition(vec, left, right);
+    QuickSort(vec, left, mid - 1);
+    QuickSort(vec, mid + 1, right);
+}
+
+void QuickSort(std::vector<int> &vec) {
+    const int size = static_cast<int>(vec.size());
+    QuickSort(vec, 0, size - 1);
 }

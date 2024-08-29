@@ -18,9 +18,10 @@ int main()
     // TestSortAlgorithm("Selection", SelectionSort, vec);
     // TestSortAlgorithm("Insertion", InsertionSort, vec);
     // TestSortAlgorithm("Shell", ShellSort, vec);
-    TestSortAlgorithm("MergeSortTopToBottom", MergeSortTopToBottom, vec);
+    // TestSortAlgorithm("MergeSortTopToBottom", MergeSortTopToBottom, vec);
     // TestSortAlgorithm("MergeSortBasedOnList", MergeSortBasedOnList, list);
-    TestSortAlgorithm("MergeSortOptimized", MergeSortOptimized, vec);
+    // TestSortAlgorithm("MergeSortOptimized", MergeSortOptimized, vec);
+    TestSortAlgorithm("QuickSort", QuickSort, vec);
 
     return 0;
 }
