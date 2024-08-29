@@ -8,13 +8,17 @@
 
 class Numbers {
 public:
-    static void GenerateRandomNumbers(const size_t size, const int min_value, const int max_value, std::vector<int> &ref_nums) {
-        ref_nums.resize(size);
+    static int GenerateRandomNumber(const int min_value, const int max_value) {
         const unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
         std::mt19937 generator(seed);
-        std::uniform_int_distribution<int> distribution(min_value, max_value);
+        std::uniform_int_distribution distribution(min_value, max_value);
+        return distribution(generator);
+    }
+
+    static void GenerateRandomNumbers(const size_t size, const int min_value, const int max_value, std::vector<int> &ref_nums) {
+        ref_nums.resize(size);
         for (int i = 0; i < size; i++) {
-            ref_nums[i] = distribution(generator);
+            ref_nums[i] = GenerateRandomNumber(min_value, max_value);
         }
     }
 

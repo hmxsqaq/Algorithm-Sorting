@@ -7,16 +7,19 @@ int main()
     Log::Instance().SetLogLevel(Log::Level::LOG_DEBUG);
     Log::Instance().SetLogFile("log.txt", std::ios::out);
 
-    std::vector<int> nums;
-    // Numbers::GenerateSortedNumbers(1000, true, nums);
-    Numbers::GetNumbersFromData("1Kints.txt", nums);
-    // Numbers::GenerateRandomNumbers(10, 0, 100, nums);
+    std::vector<int> vec;
+    // Numbers::GenerateSortedNumbers(1000, true, vec);
+    Numbers::GetNumbersFromData("1Kints.txt", vec);
+    // Numbers::GenerateRandomNumbers(10, 0, 100, vec);
+    std::list list(vec.begin(), vec.end());
 
-    // TestSortAlgorithm("Bubble", BubbleSort, nums);
-    // TestSortAlgorithm("BubbleWithFlag", BubbleSortWithFlag, nums);
-    // TestSortAlgorithm("Selection", SelectionSort, nums);
-    // TestSortAlgorithm("Insertion", InsertionSort, nums);
-    // TestSortAlgorithm("Shell", ShellSort, nums);
-    TestSortAlgorithm("Merge", MergeSortBottomToTop, nums);
+    // TestSortAlgorithm("Bubble", BubbleSort, vec);
+    // TestSortAlgorithm("BubbleWithFlag", BubbleSortWithFlag, vec);
+    // TestSortAlgorithm("Selection", SelectionSort, vec);
+    // TestSortAlgorithm("Insertion", InsertionSort, vec);
+    // TestSortAlgorithm("Shell", ShellSort, vec);
+    TestSortAlgorithm("MergeSortTopToBottom", MergeSortTopToBottom, vec);
+    TestSortAlgorithm("MergeSortBasedOnList", MergeSortBasedOnList, list);
+
     return 0;
 }

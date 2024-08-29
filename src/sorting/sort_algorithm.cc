@@ -1,5 +1,6 @@
 #include "sort_algorithm.h"
 
+/* ---------------BubbleSort--------------- */
 void BubbleSort(std::vector<int> &vec) {
     const int size = static_cast<int>(vec.size());
     for (int i = size - 1; i > 0; --i)
@@ -22,7 +23,7 @@ void BubbleSortWithFlag(std::vector<int> &vec) {
 }
 
 
-
+/* ---------------SelectionSort--------------- */
 void SelectionSort(std::vector<int> &vec) {
     const int size = static_cast<int>(vec.size());
     for (int i = 0; i < size; i++) {
@@ -36,7 +37,7 @@ void SelectionSort(std::vector<int> &vec) {
 }
 
 
-
+/* ---------------InsertionSort--------------- */
 void InsertionSort(std::vector<int> &vec) {
     const int size = static_cast<int>(vec.size());
     for (int i = 1; i < size; i++) {
@@ -61,7 +62,7 @@ void InsertionSort(std::vector<int> &vec, int left, int right) {
 }
 
 
-
+/* ---------------ShellSort--------------- */
 void ShellSort(std::vector<int> &vec) {
     const int size = static_cast<int>(vec.size());
     int h = size / 3;
@@ -79,7 +80,7 @@ void ShellSort(std::vector<int> &vec) {
 }
 
 
-
+/* ---------------MergeSort--------------- */
 void Merge(std::vector<int> &vec, const int left, const int mid, const int right) {
     const int length = right - left + 1;
     std::vector<int> temp(length);
@@ -124,4 +125,19 @@ void MergeSortBottomToTop(std::vector<int> &vec) {
             Merge(vec, left, mid, right);
         }
     }
+}
+
+std::list<int> MergeSortBasedOnList(std::list<int> &list) {
+    if (list.size() <= 1) return list;
+
+    const int size = static_cast<int>(list.size());
+    auto mid = std::next(list.begin(), size / 2);
+    std::list<int> left;
+    left.splice(left.begin(), list, list.begin(), mid);
+
+    left = MergeSortBasedOnList(left);
+    std::list<int> right = MergeSortBasedOnList(list);
+
+    left.merge(right);
+    return left;
 }

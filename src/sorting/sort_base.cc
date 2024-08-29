@@ -1,5 +1,7 @@
 #include "sort_base.h"
 
+#include <list>
+
 #include "utility/function_tracker.h"
 
 FunctionTracker swap_tracker("Swap");
@@ -32,9 +34,28 @@ bool IsSorted(const std::vector<int> &vec) {
     return true;
 }
 
+bool IsSorted(const std::list<int> &list) {
+    if (list.size() < 2) return true;
+    auto it = list.begin();
+    auto next_it = std::next(it);
+    while (next_it != list.end()) {
+        if (*next_it < *it) return false;
+        ++it;
+        ++next_it;
+    }
+    return true;
+}
+
 void PrintVec(const std::vector<int> &vec) {
     std::ostringstream oss;
     for (const int i : vec)
+        oss << " " << i;
+    LOG_INFO("[" + oss.str() + " ]");
+}
+
+void PrintVec(const std::list<int> &list) {
+    std::ostringstream oss;
+    for (const int i : list)
         oss << " " << i;
     LOG_INFO("[" + oss.str() + " ]");
 }

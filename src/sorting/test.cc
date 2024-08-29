@@ -30,3 +30,24 @@ void TestSortAlgorithm(const std::string &algorithm_name,
         LOG_ERROR("Test - FAILED\n");
     }
 }
+
+void TestSortAlgorithm(const std::string &algorithm_name,
+                       const std::function<std::list<int>(std::list<int> &)> &sort_algorithm,
+                       const std::list<int> &list,
+                       const bool show_vec) {
+    std::list copyed_vec(list.begin(), list.end());
+    if (show_vec) PrintVec(copyed_vec);
+
+    Timer timer(algorithm_name, false);
+    copyed_vec = sort_algorithm(copyed_vec);
+    timer.Stop();
+
+    if (show_vec) PrintVec(copyed_vec);
+    timer.Log();
+
+    if (IsSorted(copyed_vec)) {
+        LOG_INFO("Test - PASSED\n");
+    } else {
+        LOG_ERROR("Test - FAILED\n");
+    }
+}
