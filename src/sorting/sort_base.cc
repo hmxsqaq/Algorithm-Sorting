@@ -6,24 +6,26 @@
 
 FunctionTracker swap_tracker("Swap");
 FunctionTracker compare_tracker("Compare");
+bool track_swap = false;
+bool track_compare = false;
 
 void Swap(int &a, int &b) {
-    swap_tracker.FunctionStart();
+    if (track_swap) swap_tracker.FunctionStart();
     std::swap(a, b);
-    swap_tracker.FunctionEnd();
+    if (track_swap) swap_tracker.FunctionEnd();
 }
 
 bool IsSmaller(const int &a, const int &b) {
-    compare_tracker.FunctionStart();
+    if (track_compare) compare_tracker.FunctionStart();
     const bool result = a < b;
-    compare_tracker.FunctionEnd();
+    if (track_compare) compare_tracker.FunctionEnd();
     return result;
 }
 
 bool IsGreater(const int &a, const int &b) {
-    compare_tracker.FunctionStart();
+    if (track_compare) compare_tracker.FunctionStart();
     const bool result = a > b;
-    compare_tracker.FunctionEnd();
+    if (track_compare) compare_tracker.FunctionEnd();
     return result;
 }
 

@@ -9,7 +9,7 @@ int main()
 
     std::vector<int> vec;
     // Numbers::GenerateSortedNumbers(1000, true, vec);
-    Numbers::GetNumbersFromData("1Kints.txt", vec);
+    Numbers::GetNumbersFromData("32Kints.txt", vec);
     // Numbers::GenerateRandomNumbers(10, 0, 100, vec);
     std::list list(vec.begin(), vec.end());
 
