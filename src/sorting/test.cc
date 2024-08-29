@@ -5,6 +5,8 @@
 
 extern FunctionTracker swap_tracker;
 extern FunctionTracker compare_tracker;
+extern bool track_swap;
+extern bool track_compare;
 
 void TestSortAlgorithm(const std::string &algorithm_name,
                        const std::function<void(std::vector<int> &)> &sort_algorithm,
@@ -20,8 +22,8 @@ void TestSortAlgorithm(const std::string &algorithm_name,
     timer.Stop();
 
     if (show_vec) PrintVec(copyed_vec);
-    swap_tracker.Log();
-    compare_tracker.Log();
+    if (track_swap) swap_tracker.Log();
+    if (track_compare) compare_tracker.Log();
     timer.Log();
 
     if (IsSorted(copyed_vec)) {

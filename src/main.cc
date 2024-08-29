@@ -11,7 +11,7 @@ int main()
     // Numbers::GenerateSortedNumbers(1000, true, vec);
     Numbers::GetNumbersFromData("32Kints.txt", vec);
     // Numbers::GenerateRandomNumbers(10, 0, 100, vec);
-    std::list list(vec.begin(), vec.end());
+    // const std::list list(vec.begin(), vec.end());
 
     // TestSortAlgorithm("Bubble", BubbleSort, vec);
     // TestSortAlgorithm("BubbleWithFlag", BubbleSortWithFlag, vec);
@@ -19,7 +19,8 @@ int main()
     // TestSortAlgorithm("Insertion", InsertionSort, vec);
     // TestSortAlgorithm("Shell", ShellSort, vec);
     TestSortAlgorithm("MergeSortTopToBottom", MergeSortTopToBottom, vec);
-    TestSortAlgorithm("MergeSortBasedOnList", MergeSortBasedOnList, list);
+    // TestSortAlgorithm("MergeSortBasedOnList", MergeSortBasedOnList, list);
+    TestSortAlgorithm("MergeSortOptimized", MergeSortOptimized, vec);
 
     return 0;
 }
