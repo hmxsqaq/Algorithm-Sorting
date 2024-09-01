@@ -29,6 +29,13 @@ bool IsGreater(const int &a, const int &b) {
     return result;
 }
 
+bool IsEqual(const int &a, const int &b) {
+    if (track_compare) compare_tracker.FunctionStart();
+    const bool result = a == b;
+    if (track_compare) compare_tracker.FunctionEnd();
+    return result;
+}
+
 bool IsSorted(const std::vector<int> &vec) {
     for (int i = 0; i < vec.size() - 1; i++)
         if (vec[i] > vec[i + 1])

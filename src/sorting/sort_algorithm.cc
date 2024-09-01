@@ -234,3 +234,26 @@ void QuickSort3Sample(std::vector<int> &vec) {
     const int size = static_cast<int>(vec.size());
     QuickSort3Sample(vec, 0, size - 1);
 }
+
+/* ---------------QuickSort3Way--------------- */
+void QuickSort3Way(std::vector<int> &vec, const int left, const int right) {
+    if (left >= right) return;
+    int less_then_i = left, i = left + 1, greater_than_i = right;
+    const int item = vec[left];
+    while (i <= greater_than_i) {
+        if (IsSmaller(vec[i], item)) {
+            Swap(vec, less_then_i++, i++);
+        } else if (IsGreater(vec[i], item)) {
+            Swap(vec, greater_than_i--, i);
+        } else {
+            i++;
+        }
+    }
+    QuickSort3Way(vec, left, less_then_i - 1);
+    QuickSort3Way(vec, greater_than_i + 1 , right);
+}
+
+void QuickSort3Way(std::vector<int> &vec) {
+    const int size = static_cast<int>(vec.size());
+    QuickSort3Way(vec, 0, size - 1);
+}

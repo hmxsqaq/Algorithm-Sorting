@@ -23,4 +23,5 @@ void MergeSortOptimized(std::vector<int> &vec);
 
 void QuickSort(std::vector<int> &vec);
 void QuickSort3Sample(std::vector<int> &vec);
+void QuickSort3Way(std::vector<int> &vec);
 #endif //SORT_ALGORITHM_H
