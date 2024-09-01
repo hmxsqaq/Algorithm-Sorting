@@ -22,4 +22,5 @@ std::list<int> MergeSortBasedOnList(std::list<int> &list);
 void MergeSortOptimized(std::vector<int> &vec);
 
 void QuickSort(std::vector<int> &vec);
+void QuickSort3Sample(std::vector<int> &vec);
 #endif //SORT_ALGORITHM_H

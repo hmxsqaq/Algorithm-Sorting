@@ -199,3 +199,38 @@ void QuickSort(std::vector<int> &vec) {
     const int size = static_cast<int>(vec.size());
     QuickSort(vec, 0, size - 1);
 }
+
+/* ---------------QuickSort3Sample--------------- */
+int Partition3Sample(std::vector<int> &vec, const int left, const int right) {
+    // sample item at left/mid/right
+    const int mid = (left + right) / 2;
+    if (IsGreater(vec[mid], vec[right])) Swap(vec, right, mid);
+    if (IsGreater(vec[mid], vec[left])) Swap(vec, left, mid);
+    if (IsGreater(vec[left], vec[right])) Swap(vec, left, right);
+    const int item = vec[left];
+    int i = left, j = right + 1;
+    while (true) {
+        while (IsSmaller(vec[++i], item)) {} // prevent out-of-bounds
+        while (IsGreater(vec[--j], item)) {}
+        if (i >= j) break;
+        Swap(vec, i, j);
+    }
+    Swap(vec, left, j);
+    return j;
+}
+
+void QuickSort3Sample(std::vector<int> &vec, const int left, const int right) {
+    static int kCUTOFF = 7;
+    if (right - left <= kCUTOFF) { // apply insertion sort for small subarrays
+        InsertionSort(vec, left, right);
+        return;
+    }
+    const int mid = Partition3Sample(vec, left, right);
+    QuickSort3Sample(vec, left, mid - 1);
+    QuickSort3Sample(vec, mid + 1, right);
+}
+
+void QuickSort3Sample(std::vector<int> &vec) {
+    const int size = static_cast<int>(vec.size());
+    QuickSort3Sample(vec, 0, size - 1);
+}

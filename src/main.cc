@@ -22,6 +22,6 @@ int main()
     // TestSortAlgorithm("MergeSortBasedOnList", MergeSortBasedOnList, list);
     // TestSortAlgorithm("MergeSortOptimized", MergeSortOptimized, vec);
     TestSortAlgorithm("QuickSort", QuickSort, vec);
-
+    TestSortAlgorithm("QuickSort3Sample", QuickSort3Sample, vec);
     return 0;
 }
