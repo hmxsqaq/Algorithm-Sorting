@@ -36,9 +36,9 @@ bool IsEqual(const int &a, const int &b) {
     return result;
 }
 
-bool IsSorted(const std::vector<int> &vec) {
+bool IsSorted(const std::vector<int> &vec, bool reversed) {
     for (int i = 0; i < vec.size() - 1; i++)
-        if (vec[i] > vec[i + 1])
+        if (reversed ? vec[i] < vec[i + 1] : vec[i] > vec[i + 1])
             return false;
     return true;
 }

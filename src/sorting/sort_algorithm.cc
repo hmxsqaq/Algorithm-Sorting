@@ -86,8 +86,8 @@ void Merge(std::vector<int> &vec, const int left, const int mid, const int right
     std::vector<int> temp(length);
     int i = left, j = mid + 1, k = 0;
     while (i <= mid && j <= right) {
-        if (IsSmaller(vec[i], vec[j]))  temp[k++] = vec[i++];
-        else                            temp[k++] = vec[j++];
+        if (IsSmaller(vec[i], vec[j])) temp[k++] = vec[i++];
+        else                                  temp[k++] = vec[j++];
     }
     while (i <= mid)    temp[k++] = vec[i++];
     while (j <= right)  temp[k++] = vec[j++];
@@ -137,12 +137,12 @@ std::list<int> MergeSortBasedOnList(std::list<int> &list) {
     return left;
 }
 
-/* ---------------MergeSortBasedOnList--------------- */
+/* ---------------MergeSortOptimized--------------- */
 void MergeOptimized(const std::vector<int> &source, std::vector<int> &destination, const int left, const int mid, const int right) {
     int i = left, j = mid + 1, k = left;
     while (i <= mid && j <= right) {
         if (IsSmaller(source[i], source[j]))    destination[k++] = source[i++];
-        else                                    destination[k++] = source[j++];
+        else                                           destination[k++] = source[j++];
     }
     while (i <= mid)    destination[k++] = source[i++];
     while (j <= right)  destination[k++] = source[j++];
@@ -256,4 +256,78 @@ void QuickSort3Way(std::vector<int> &vec, const int left, const int right) {
 void QuickSort3Way(std::vector<int> &vec) {
     const int size = static_cast<int>(vec.size());
     QuickSort3Way(vec, 0, size - 1);
+}
+
+void HeapSortBrute(std::vector<int> &vec) {
+    MaxPriorityQueue pq;
+    for (int i : vec) pq.Insert(i);
+    for (int &i : vec) i = pq.ExtractMax();
+}
+
+void SinkFrom0(std::vector<int> &vec, int root, int end) {
+    int child = 2 * root + 1;
+    while (child <= end) {
+        if (child < end && IsSmaller(vec[child], vec[child + 1])) child++;
+        if (IsGreater(vec[root], vec[child]) || IsEqual(vec[root], vec[child])) break;
+        Swap(vec, root, child);
+        root = child;
+        child = 2 * root + 1;
+    }
+}
+
+void SinkFrom1(std::vector<int> &vec, int root, int end) {
+    int child = 2 * root;
+    while (child <= end) {
+        if (child < end && IsSmaller(vec[child], vec[child + 1])) child++;
+        if (IsGreater(vec[root], vec[child]) || IsEqual(vec[root], vec[child])) break;
+        Swap(vec, root, child);
+        root = child;
+        child = 2 * root;
+    }
+}
+
+void HeapSortInPlace(std::vector<int> &vec) {
+    const int size = static_cast<int>(vec.size());
+    for (int i = size / 2 - 1; i >= 0; i--) SinkFrom0(vec, i, size - 1);
+    for (int i = size - 1; i > 0; i--) {
+        Swap(vec, 0, i);
+        SinkFrom0(vec, 0, i - 1);
+    }
+}
+
+void MaxPriorityQueue::Insert(int key) {
+    pq_.push_back(key);
+    Swim(static_cast<int>(pq_.size()) - 1);
+}
+
+int MaxPriorityQueue::ExtractMax() {
+    if (pq_.size() <= 1) throw std::runtime_error("queue is empty");
+    int max = pq_[1];
+    pq_[1] = pq_.back();
+    pq_.pop_back();
+    Sink(1);
+    return max;
+}
+
+int MaxPriorityQueue::GetMax() const {
+    if (pq_.size() <= 1) throw std::runtime_error("queue is empty");
+    return pq_[1];
+}
+
+void MaxPriorityQueue::Swim(int i) {
+    while (i > 1 && IsSmaller(pq_[i / 2], pq_[i])) {
+        Swap(pq_, i / 2, i);
+        i /= 2;
+    }
+}
+
+void MaxPriorityQueue::Sink(int i) {
+    int child = 2 * i;
+    while (child < pq_.size()) {
+        if (child < pq_.size() - 1 && IsSmaller(pq_[child], pq_[child + 1])) child++;
+        if (IsGreater(pq_[i], pq_[child]) || IsEqual(pq_[i], pq_[child])) break;
+        Swap(pq_, i, child);
+        i = child;
+        child = 2 * i;
+    }
 }
